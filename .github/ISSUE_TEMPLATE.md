@@ -1,4 +1,4 @@
-#EssentialItems Bug Report
+ESSENTIALITEMS BUG REPORT
 
 Thank you for helping to improveEssentialItems and submitting a bug report!  Please fill out these fields.  You may provide any other information
 we need to know to help solve your issue.
