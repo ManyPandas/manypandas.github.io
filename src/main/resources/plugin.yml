@@ -92,9 +92,6 @@ commands:
       description: 'EssentialItems Info'
       usage: '/<command>'
       
-    fly:
-      description: 'Toggles flight'
-      usage: '/<command>'
       
       
       

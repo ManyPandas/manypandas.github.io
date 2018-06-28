@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.essentialitems.command.CmdList;
 import com.essentialitems.command.CommandInterpreter;
 import com.essentialitems.command.CommandReceiver;
 import com.essentialitems.command.invsee.InvSeeGui;
@@ -41,27 +42,12 @@ public class Main extends JavaPlugin {
 		
 		//Register Commands
 		{
-			this.getCommand("ban").setExecutor(receiver);
-			this.getCommand("motd").setExecutor(receiver);
-			this.getCommand("msg").setExecutor(receiver);
-			this.getCommand("kick").setExecutor(receiver);
-			this.getCommand("unban").setExecutor(receiver);
-			this.getCommand("tempban").setExecutor(receiver);
-			this.getCommand("broadcast").setExecutor(receiver);
-			this.getCommand("warn").setExecutor(receiver);
-			this.getCommand("mute").setExecutor(receiver);
-			this.getCommand("unmute").setExecutor(receiver);
-			this.getCommand("vanish").setExecutor(receiver);
-			this.getCommand("lockdown").setExecutor(receiver);
-			this.getCommand("gamemode").setExecutor(receiver);
-			this.getCommand("feed").setExecutor(receiver);
-			this.getCommand("heal").setExecutor(receiver);
-			this.getCommand("workbench").setExecutor(receiver);
-			this.getCommand("chatslow").setExecutor(receiver);
-			this.getCommand("tempmute").setExecutor(receiver);
-			this.getCommand("invsee").setExecutor(receiver);
-			this.getCommand("essentialitems").setExecutor(receiver);
-			this.getCommand("fly").setExecutor(receiver);
+			//YAY WE DON'T HAVE TO REGISTER IN THE MAIN CLASS ANYMORE!!!
+			//WE JUST ADD THE COMMAND TO THE CMDLIST AND PLUGIN YML!!!
+			//THIS IS THE BEST DAY OF MY LIFE!!!
+			for(CmdList cmd : CmdList.values()) {
+				this.getCommand(cmd.getName()).setExecutor(receiver);
+			}
 		}
 		
 		
