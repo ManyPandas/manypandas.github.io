@@ -39,7 +39,8 @@ public enum CmdList {
 	HEAL("heal", "/heal [Player]",0,false,Util.permission.canHeal.get(),new HealCommand()),
 	WORKBENCH("workbench","/workbench",0,false,Util.permission.canWorkbench.get(),new WorkbenchCommand()),
 	CHATSLOW("chatslow","/chatslow [Cooldown in Seconds]",0,true,Util.permission.canChatStop.get(), new ChatSlowCommand()),
-	INVSEE("invsee","/invsee <Player>",1,true,Util.permission.canInvsee.get(), new InvseeCommand()),
+	INVSEE("invsee","/invsee <Player>",1,false,Util.permission.canInvsee.get(), new InvseeCommand()),
+	FLY("fly","/fly",0,false,Util.permission.canFly.get(), new FlyCommand())
 	
 	
 	

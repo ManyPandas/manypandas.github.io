@@ -28,7 +28,6 @@ public final class Util {
 	//No instances
 	private Util() {}
 	
-	//Commented out for now.
 	public static void asyncSendMessage(Player p, String message, Main mainclass) {
 		
 		BukkitScheduler scheduler = mainclass.getServer().getScheduler();
@@ -309,7 +308,7 @@ public final class Util {
 		 canBypassChatStop(new Permission("essentialitems.chatslow.bypass")),
 		 canTempMute(new Permission("essentialitems.tempmute")),
 		 canInvsee(new Permission("essentialitems.invsee")),
-		 
+		 canFly(new Permission("essentialitems.fly")),		 
 		  ;
 		
 		

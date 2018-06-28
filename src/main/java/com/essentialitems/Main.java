@@ -61,6 +61,7 @@ public class Main extends JavaPlugin {
 			this.getCommand("tempmute").setExecutor(receiver);
 			this.getCommand("invsee").setExecutor(receiver);
 			this.getCommand("essentialitems").setExecutor(receiver);
+			this.getCommand("fly").setExecutor(receiver);
 		}
 		
 		
