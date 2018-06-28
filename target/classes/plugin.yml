@@ -35,7 +35,7 @@ commands:
       usage: '/warn <Player> <Reason>'
       
     msg:
-      description: 'Sends a private message to the player provide.'
+      description: 'Sends a private message to the player provided.'
       usage: '/msg <Player> <Reason>'
       aliases: [whisper,tell,pm]
       
@@ -62,7 +62,7 @@ commands:
       aliases: [gm]
       
     feed:
-      description: 'Feeds the privided player to full hunger.'
+      description: 'Feeds the provided player to full hunger.'
       usage: '/feed [Player]'
       aliases: [eat]
       
