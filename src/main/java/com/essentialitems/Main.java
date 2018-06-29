@@ -48,6 +48,8 @@ public class Main extends JavaPlugin {
 			for(CmdList cmd : CmdList.values()) {
 				this.getCommand(cmd.getName()).setExecutor(receiver);
 			}
+			//Well, we have to manuallt register this one, as it bypasses the command processing...
+			this.getCommand("essentialitems").setExecutor(receiver);
 		}
 		
 		

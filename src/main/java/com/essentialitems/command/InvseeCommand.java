@@ -11,6 +11,7 @@ import com.essentialitems.Main;
 import com.essentialitems.Util;
 import com.essentialitems.command.invsee.InvSeeGui;
 
+
 public class InvseeCommand extends CommandSkeleton {
 	
 	public static HashMap<Player, Player> invseeing = new HashMap<Player, Player>();

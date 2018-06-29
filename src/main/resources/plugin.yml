@@ -85,7 +85,7 @@ commands:
       usage: '/tempmute <Player> <Time in Minutes> <Reason>' 
       
     invsee:
-      description: 'Views inside of a player inventory.'
+      description: 'Views inside of the provided player's inventory.'
       usage: '/invsee <Player>'
       
     essentialitems:
