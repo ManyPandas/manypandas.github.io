@@ -52,7 +52,7 @@ public final class CommandReceiver implements org.bukkit.command.CommandExecutor
 			sender.sendMessage(esheader+ChatColor.GREEN+ChatColor.BOLD+"Thank you for using Essentialitems!");
 			sender.sendMessage(esheader+ChatColor.GREEN+ChatColor.BOLD+"You are running plugin version "+ChatColor.RESET+ChatColor.GREEN+mainclass.getDescription().getVersion());
 			sender.sendMessage(esheader+ChatColor.GREEN+ChatColor.BOLD+"Project Page:"+ChatColor.RESET+ChatColor.GREEN+"https://dev.bukkit.org/projects/essentialitems");
-			sender.sendMessage(esheader+ChatColor.GREEN+ChatColor.BOLD+"GitHub:"+ChatColor.RESET+ChatColor.GREEN+"https://github.com/ManyPandas/EssentialItems");
+			sender.sendMessage(esheader+ChatColor.GREEN+ChatColor.BOLD+"GitHub:"+ChatColor.RESET+ChatColor.GREEN+"https://github.com/ManyPandas/manypandas.github.io");
 			
 			return true;
 		}
