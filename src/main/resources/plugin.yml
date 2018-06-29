@@ -77,7 +77,7 @@ commands:
       
     chatslow:
       description: 'Adds a cooldown between chat messages.'
-      usage: '/chatslow <CoolDown in Seconds>'
+      usage: '/chatslow <Cooldown in Seconds>'
       aliases: [slowchat, sc]
     
     tempmute: 

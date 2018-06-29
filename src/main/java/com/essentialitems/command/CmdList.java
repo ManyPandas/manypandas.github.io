@@ -32,12 +32,12 @@ public enum CmdList {
 	TEMPMUTE("tempmute","/tempmute <Player> <Time in Minutes> <Reason>",3,true,Util.permission.canTempMute.get(),new TempMuteCommand()),
 	UNMUTE("unmute","/unmute <Player>", 1,true,Util.permission.canUnmute.get(), new UnmuteCommand()),
 	VANISH("vanish","/vanish",0,false,Util.permission.canVanish.get(),new VanishCommand()),
-	LOCKDOWN("lockdown","/lockdown [Reason]",0,true,Util.permission.canStartLockdown.get(),new LockdownCommand()),
+	LOCKDOWN("lockdown","/lockdown <Reason>",0,true,Util.permission.canStartLockdown.get(),new LockdownCommand()),
 	GAMEMODE("gamemode","/gamemode <Mode> [Player]",1,false,Util.permission.canGameMode.get(),new GamemodeCommand()),
 	FEED("feed", "/feed [Player]",0,false,Util.permission.canFeed.get(),new FeedCommand()),
 	HEAL("heal", "/heal [Player]",0,false,Util.permission.canHeal.get(),new HealCommand()),
 	WORKBENCH("workbench","/workbench",0,false,Util.permission.canWorkbench.get(),new WorkbenchCommand()),
-	CHATSLOW("chatslow","/chatslow [Cooldown in Seconds]",0,true,Util.permission.canChatStop.get(), new ChatSlowCommand()),
+	CHATSLOW("chatslow","/chatslow <Cooldown in Seconds>",0,true,Util.permission.canChatStop.get(), new ChatSlowCommand()),
 	
 	
 	
