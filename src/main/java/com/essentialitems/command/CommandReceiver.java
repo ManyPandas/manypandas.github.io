@@ -45,7 +45,6 @@ public final class CommandReceiver implements org.bukkit.command.CommandExecutor
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) { 
-		//Just temporarily initialized. It will be changed to a valid CmdList instance and then back into null, after the error code (if any) is processed.
 		
 		//Immediate response to /essentialitems (none of that command processing bullcrap)
 		if(cmd.getName().equalsIgnoreCase("essentialitems")) {
@@ -56,7 +55,7 @@ public final class CommandReceiver implements org.bukkit.command.CommandExecutor
 			
 			return true;
 		}
-		
+		//Just temporarily initialized. It will be changed to a valid CmdList instance and then back into null, after the error code (if any) is processed.
 		CmdList finalCmd = null;
 		int errcode =6;
 		
