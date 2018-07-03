@@ -109,7 +109,7 @@ public final class GamemodeCommand extends CommandSkeleton {
 						}
 						p.setGameMode(GameMode.SURVIVAL);
 						p.sendMessage(header+ChatColor.BLUE+sender.getName()+ChatColor.GREEN+" set your Gamemode to "+ChatColor.BLUE+"SURVIVAL"+ChatColor.RESET+ChatColor.GREEN+" mode.");
-						sender.sendMessage(header+ChatColor.GREEN+"Set "+ChatColor.BLUE+args[1]+"'s"+ChatColor.GREEN+"gamemode to "+ ChatColor.BLUE+"SURVIVAL"+ChatColor.GREEN+" mode.");
+						sender.sendMessage(header+ChatColor.GREEN+"Set "+ChatColor.BLUE+args[1]+"'s"+ChatColor.GREEN+" gamemode to "+ ChatColor.BLUE+"SURVIVAL"+ChatColor.GREEN+" mode.");
 						p.playSound(p.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 20000, 1);
 						return 0;
 					}
@@ -191,6 +191,9 @@ public final class GamemodeCommand extends CommandSkeleton {
 				p.sendMessage(header+ChatColor.GREEN+"Set own gamemode to "+ChatColor.BLUE+"ADVENTURE"+ChatColor.RESET+ChatColor.GREEN+" mode.");
 				p.playSound(p.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 20000, 1);
 				return 0;
+				
+				
+				
 			}
 			else {
 				return 3;

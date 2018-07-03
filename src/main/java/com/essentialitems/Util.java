@@ -307,7 +307,8 @@ public final class Util {
 		 canChatStop(new Permission("essentialitems.chatslow.command")),
 		 canBypassChatStop(new Permission("essentialitems.chatslow.bypass")),
 		 canTempMute(new Permission("essentialitems.tempmute")),
-		 canInvsee(new Permission("essentialitems.invsee")),		 
+		 canInvsee(new Permission("essentialitems.invsee")),
+		 canDamage(new Permission("essentialitems.damage")),
 		  ;
 		
 		

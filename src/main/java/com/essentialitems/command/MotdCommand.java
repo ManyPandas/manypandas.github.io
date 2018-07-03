@@ -151,7 +151,7 @@ public final class MotdCommand extends CommandSkeleton {
 			//W are toggling the olea message ON (for some reason...)
 			inv.setItem(slotNumber, MotdGui.buttons.LEFTENABLED.get());
 			p.playSound(p.getLocation(), Sound.BLOCK_NOTE_PLING, 1000, (float) 2.0);
-			mainclass.getConfig().set(Util.configKey.doOleaMessage.toString(),false);
+			mainclass.getConfig().set(Util.configKey.doOleaMessage.toString(),true);
 			mainclass.saveConfig();
 			return;
 			

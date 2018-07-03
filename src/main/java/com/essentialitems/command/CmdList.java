@@ -10,9 +10,9 @@ public enum CmdList {
 	 * 
 	 * 1. Register in the CmdList
 	 * 2. Register in plugin.yml
-	 * 4. Create Command Class
-	 * 4a. Make Sure the new class extends CommandSkeleton
-	 * 5. Write all necessary code for the command.  If multiple classes are needed (for instance, the MOTD command) keep the.., 
+	 * 3. Create Command Class
+	 * 3a. Make sure the new class extends CommandSkeleton
+	 * 4. Write all necessary code for the command.  If multiple classes are needed (for instance the MOTD command) keep the...
 	 *    ...command's point of entry in the main command package, then create a new package for the necessary additional classes.
 	 *    
 	 * If not all of the steps are followed, the command will not work.
@@ -39,6 +39,8 @@ public enum CmdList {
 	WORKBENCH("workbench","/workbench",0,false,Util.permission.canWorkbench.get(),new WorkbenchCommand()),
 	CHATSLOW("chatslow","/chatslow <Cooldown in Seconds>",0,true,Util.permission.canChatStop.get(), new ChatSlowCommand()),
 	INVSEE("invsee","/invsee <Player>",1,false,Util.permission.canInvsee.get(), new InvseeCommand()),
+	DAMAGE("damage","/damage <Damage [Player]",1,false,Util.permission.canDamage.get(), new DamageCommand()),
+	
 	
 	
 	

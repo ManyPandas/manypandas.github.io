@@ -24,9 +24,11 @@ public final class MsgCommand extends CommandSkeleton {
 				return 0;
 			}
 			String message = Util.buildMessage(args, 1);
-			target.sendMessage(ChatColor.DARK_GREEN+""+ChatColor.BOLD+"[Private Message] "+p.getName()+" --> You");
+			target.sendMessage(ChatColor.DARK_GREEN+""+ChatColor.BOLD+"[Private Message]§r§a "+p.getName()+" --> You");
+			target.sendMessage(" ");
 			target.sendMessage(ChatColor.DARK_GREEN+""+ChatColor.BOLD+message);
-			p.sendMessage(ChatColor.DARK_GREEN+""+ChatColor.BOLD+"[Private Message] You --> "+ target.getName()+" ");
+			p.sendMessage(ChatColor.DARK_GREEN+""+ChatColor.BOLD+"[Private Message]§r§a You --> "+ target.getName()+" ");
+			p.sendMessage(" ");
 			p.sendMessage(ChatColor.DARK_GREEN+""+ChatColor.BOLD+message);
 			return 0;
 			
