@@ -136,7 +136,7 @@ public final class CommandReceiver implements org.bukkit.command.CommandExecutor
 			mainclass.getLogger().log(Level.WARNING, "Stack trace:");
 			mainclass.getLogger().log(Level.WARNING, ExceptionUtils.getStackTrace(e));
 			mainclass.getLogger().log(Level.WARNING, "Please help the EssentialItems project by submitting a bug report at:");
-			mainclass.getLogger().log(Level.WARNING, "https://github.com/ManyPandas/EssentialItems");
+			mainclass.getLogger().log(Level.WARNING, "https://github.com/ManyPandas/manypandas.github.io");
 			
 			
 

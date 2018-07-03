@@ -20,7 +20,7 @@ public class DamageCommand extends CommandSkeleton {
 		if(args.length>1) {
 			
 			//If the name refers to all online players
-			if(args[1].equalsIgnoreCase("all")) {
+			if(args[0].equalsIgnoreCase("all")) {
 				
 				double damage;
 				
@@ -31,7 +31,12 @@ public class DamageCommand extends CommandSkeleton {
 				catch(Exception e) {
 					return 3;
 				}
+
 				for(Player others : Bukkit.getOnlinePlayers()) {
+					
+					if(others.getName().equalsIgnoreCase(sender.getName())) {
+						continue;
+					}
 					others.damage(damage);
 				}
 				sender.sendMessage(dmgheader+ChatColor.DARK_RED+"Did "+ChatColor.RED+damage+ChatColor.DARK_RED+" damage to all online players");
@@ -39,17 +44,17 @@ public class DamageCommand extends CommandSkeleton {
 				
 			}
 			//Make sure that the player specified is online.
-			else if(!Util.playerOnline(args[1])) {
+			else if(!Util.playerOnline(args[0])) {
 				return 4;
 			}
 			
 			//All clear, ready to go.
 			else {
 				
-				Player target = Bukkit.getPlayer(args[1]);
+				Player target = Bukkit.getPlayer(args[0]);
 				double damage;
 				try {
-					damage = Double.parseDouble(args[0]);
+					damage = Double.parseDouble(args[1]);
 				}
 				catch(Exception e) {
 					return 3;
