@@ -9,7 +9,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
-import org.bukkit.scheduler.BukkitScheduler;
 
 
 /*
@@ -28,33 +27,6 @@ public final class Util {
 	//No instances
 	private Util() {}
 	
-	public static void asyncSendMessage(Player p, String message, Main mainclass) {
-		
-		BukkitScheduler scheduler = mainclass.getServer().getScheduler();
-		scheduler.scheduleSyncDelayedTask(mainclass, new Runnable() {
-			public void run() {
-				
-				p.sendMessage(message);
-				
-			}
-			
-		});
-		
-		
-	}
-	/*
-	public static void bukkitBroadcastMessage(String message, Main mainclass) {
-		
-		BukkitScheduler scheduler = mainclass.getServer().getScheduler();
-		scheduler.scheduleSyncDelayedTask(mainclass, new Runnable() {
-			
-			public void run() {
-				Bukkit.broadcastMessage(message);
-				
-			}
-		});
-	}
-	*/
 	
 	
 	public static String buildMessage(String[] material, int start) {
@@ -116,6 +88,27 @@ public final class Util {
 		mainclass.saveMute();
 		Bukkit.broadcastMessage(punishHeader+ChatColor.BLUE+name+ChatColor.RED+ " has been permanently muted.");
 		Bukkit.broadcastMessage(punishHeader+"§2Reason: "+reason);
+	}
+	public static void mute(String uuid, String name, String reason, boolean verbose, Main mainclass) {
+		if(!verbose) {
+			mainclass.muted.createSection(uuid);
+			mainclass.muted.getConfigurationSection(uuid).set("reason", reason);
+			mainclass.muted.getConfigurationSection(uuid).set("name", name);
+			mainclass.muted.getConfigurationSection(uuid).set("expires", (long)-1);
+			mainclass.saveMute();
+			return;
+		}
+		else {
+			mainclass.muted.createSection(uuid);
+			mainclass.muted.getConfigurationSection(uuid).set("reason", reason);
+			mainclass.muted.getConfigurationSection(uuid).set("name", name);
+			mainclass.muted.getConfigurationSection(uuid).set("expires", (long)-1);
+			mainclass.saveMute();
+			Bukkit.broadcastMessage(punishHeader+ChatColor.BLUE+name+ChatColor.RED+ " has been permanently muted.");
+			Bukkit.broadcastMessage(punishHeader+"§2Reason: "+reason);
+			return;
+		}
+		
 	}
 	public static void mute(String uuid, String name, String reason, long expiresmillis, Main mainclass) {
 		mainclass.muted.createSection(uuid);

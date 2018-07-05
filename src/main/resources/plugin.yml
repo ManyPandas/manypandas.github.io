@@ -96,6 +96,11 @@ commands:
       description: 'Deals the specified amount of damage to the specified player.'
       usage: '/damage [Player] <Damage>'
       aliases: [dmg, hurt]
+    
+    mutemigrate:
+      description: 'Migrate any old mutes to the new system.'
+      usage: '/mutemigrate'
+      
       
       
     

@@ -26,7 +26,7 @@ public class Main extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
-		this.getServer().getConsoleSender().sendMessage("[EssentialItems] "+ChatColor.GOLD+"Enabling......");
+		this.getServer().getConsoleSender().sendMessage("[EssentialItems] "+ChatColor.GOLD+"Enabling...");
 		new EventListener(this, new ChatListener(this));
 		
 		this.getServer().getConsoleSender().sendMessage("[EssentialItems] "+ChatColor.GOLD+"Checking Config...");
@@ -48,7 +48,7 @@ public class Main extends JavaPlugin {
 			for(CmdList cmd : CmdList.values()) {
 				this.getCommand(cmd.getName()).setExecutor(receiver);
 			}
-			//Well, we have to manuallt register this one, as it bypasses the command processing...
+			//Well, we have to manually register this one, as it bypasses the command processing...
 			this.getCommand("essentialitems").setExecutor(receiver);
 		}
 		

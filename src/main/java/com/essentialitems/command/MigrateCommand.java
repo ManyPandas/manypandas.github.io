@@ -46,7 +46,7 @@ public class MigrateCommand extends CommandSkeleton {
 				
 				String reason = (String) pair.getValue();
 				
-				Util.mute(uniqueId.toString(), name, reason, mainClass);
+				Util.mute(uniqueId.toString(), name, reason, false, mainClass);
 				mainClass.getConfig().getConfigurationSection("MutedPlayers").set(uniqueId.toString(), null);
 				it.remove(); //prevent ConcurrentModificationException...
 			}
