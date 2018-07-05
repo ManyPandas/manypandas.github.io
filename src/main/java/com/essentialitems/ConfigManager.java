@@ -50,7 +50,7 @@ public final class ConfigManager {
 		}
 		if(mainclass.getConfig().isConfigurationSection("MutedPlayers")) {
 			mainclass.getServer().getConsoleSender().sendMessage("[EssentialItems] "+ChatColor.RED+"Warning! Old storage format found for storing muted players!");
-			mainclass.getServer().getConsoleSender().sendMessage("[EssentialItems] "+ChatColor.RED+"This method of storing mutes is now deprecated.  Please consider using the /mute command to re-mute any pre-existing mutes to the new format.");
+			mainclass.getServer().getConsoleSender().sendMessage("[EssentialItems] "+ChatColor.RED+"This method of storing mutes is now deprecated.  Please consider running the /mutemigrate command to migrate any mutes to the new system.");
 			mainclass.getServer().getConsoleSender().sendMessage("[EssentialItems] "+ChatColor.RED+"Please note that all new mutes will be stored in a file named 'muted.yml'.");
 			mainclass.getServer().getConsoleSender().sendMessage("[EssentialItems] "+ChatColor.RED+"Support for the deprecated format will continue, however it will be cut with EssentialItems version 3.3");
 		}

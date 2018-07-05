@@ -40,6 +40,7 @@ public enum CmdList {
 	CHATSLOW("chatslow","/chatslow <Cooldown in Seconds>",0,true,Util.permission.canChatStop.get(), new ChatSlowCommand()),
 	INVSEE("invsee","/invsee <Player>",1,false,Util.permission.canInvsee.get(), new InvseeCommand()),
 	DAMAGE("damage","/damage [Player] <Damage>",1,false,Util.permission.canDamage.get(), new DamageCommand()),
+	MUTEMIGRATE("mutemigrate","/mutemigrate",0,true,Util.permission.canMigrate.get(),new MigrateCommand())
 	
 	
 	

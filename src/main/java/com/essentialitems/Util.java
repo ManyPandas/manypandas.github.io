@@ -309,6 +309,7 @@ public final class Util {
 		 canTempMute(new Permission("essentialitems.tempmute")),
 		 canInvsee(new Permission("essentialitems.invsee")),
 		 canDamage(new Permission("essentialitems.damage")),
+		 canMigrate(new Permission("essentialitems.migrate")),
 		  ;
 		
 		

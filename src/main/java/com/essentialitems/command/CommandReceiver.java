@@ -46,12 +46,12 @@ public final class CommandReceiver implements org.bukkit.command.CommandExecutor
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) { 
 		
-		//Immediate response to /essentialitems (none of that command processing bullcrap)
+		//Immediate response to /essentialitems (none of that command processing bull-crap)
 		if(cmd.getName().equalsIgnoreCase("essentialitems")) {
 			sender.sendMessage(esheader+ChatColor.GREEN+ChatColor.BOLD+"Thank you for using Essentialitems!");
 			sender.sendMessage(esheader+ChatColor.GREEN+ChatColor.BOLD+"You are running plugin version "+ChatColor.RESET+ChatColor.GREEN+mainclass.getDescription().getVersion());
-			sender.sendMessage(esheader+ChatColor.GREEN+ChatColor.BOLD+"Project Page:"+ChatColor.RESET+ChatColor.GREEN+"https://dev.bukkit.org/projects/essentialitems");
-			sender.sendMessage(esheader+ChatColor.GREEN+ChatColor.BOLD+"GitHub:"+ChatColor.RESET+ChatColor.GREEN+"https://github.com/ManyPandas/manypandas.github.io");
+			sender.sendMessage(esheader+ChatColor.GREEN+ChatColor.BOLD+"Project Page:\n"+ChatColor.RESET+ChatColor.GREEN+"https://dev.bukkit.org/projects/essentialitems");
+			sender.sendMessage(esheader+ChatColor.GREEN+ChatColor.BOLD+"GitHub:\n"+ChatColor.RESET+ChatColor.GREEN+"https://github.com/ManyPandas/manypandas.github.io");
 			
 			return true;
 		}
@@ -137,6 +137,10 @@ public final class CommandReceiver implements org.bukkit.command.CommandExecutor
 			mainclass.getLogger().log(Level.WARNING, ExceptionUtils.getStackTrace(e));
 			mainclass.getLogger().log(Level.WARNING, "Please help the EssentialItems project by submitting a bug report at:");
 			mainclass.getLogger().log(Level.WARNING, "https://github.com/ManyPandas/manypandas.github.io");
+			
+			sender.sendMessage(ChatColor.RED+"An unexpected error occured while executing EssentialItems command '"+finalCmd.getName()+"'");
+			sender.sendMessage(ChatColor.RED+"Please notify the server administrator about this issue.");
+			sender.sendMessage(ChatColor.RED+"A stack trace may be obtained in the server logs.");
 			
 			
 
