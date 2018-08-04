@@ -26,7 +26,7 @@ public final class LockdownCommand extends CommandSkeleton {
 		
 		if(mainClass.getConfig().getBoolean(Util.configKey.kickUnauthorizedOnLockdown.toString())) {
 			for(Player other : Bukkit.getOnlinePlayers()) {
-				if(other.hasPermission(Util.permission.bypassLockdown.get())) {
+				if(Util.checkPermission(Util.permission.bypassLockdown.get(),other)) {
 					continue;
 				}
 				other.kickPlayer(

@@ -12,57 +12,78 @@ public class FeedCommand extends CommandSkeleton {
 
 	@Override
 	public int run(String[] args, Main mainClass, CommandSender sender) {
-		Player p = (Player) sender;
 		
-		if(args.length>0) {
-			if(args[0].equalsIgnoreCase("all")) {
-				for(Player other : Bukkit.getOnlinePlayers()) {
+		if(args.length<=0) {
+			
+			if(!(sender instanceof Player)) {
+				return 1;
+			}
+			Player p = (Player) sender;
+			
+			if(Util.hasFeedCooldown(p, mainClass)) {
+				int cooldown = mainClass.getConfig().getInt(Util.configKey.feedCooldown.toString());
+				long nextallowedmillis = (cooldown*1000)+(long)Util.feedCooldowns.get(p);
+				long timeLeftMillis = nextallowedmillis-System.currentTimeMillis();
+				int timeLeftSeconds = (int)timeLeftMillis/1000;
+				
+				
+				sender.sendMessage(Util.healthHeader+ChatColor.RED+"You have "+timeLeftSeconds+" second"+(timeLeftSeconds>1 ? "s" : "")+" before you may use /feed again.");
+				return 0;
+			}
+			if(p.getFoodLevel()==30) {
+				p.sendMessage(Util.healthHeader+ChatColor.RED+"You are already at max food level.");
+				return 0;
+			}
+			
+			p.setFoodLevel(30);
+			p.setSaturation(10);
+			p.setExhaustion(0F);
+			p.sendMessage(Util.healthHeader+ChatColor.GREEN+"You have been fed.");
+			Util.feedCooldowns.put(p, System.currentTimeMillis());
+			
+			return 0;	
+		}
+		
+		else {
+			if(!Util.checkPermission("essentialitems.feed.other",sender)) {
+				return 5;
+			}
+			else if(args[0].equalsIgnoreCase("all")) {
+				for(Player p : Bukkit.getOnlinePlayers()) {
 					
-					if(other.getName().equals(p.getName())) {
+					if(p.getFoodLevel() ==30) {
 						continue;
 					}
-					if(other.getFoodLevel()>= 30) {
-						continue;
-					}
-					other.setFoodLevel(30);
-					other.setSaturation(10);
-					other.setExhaustion(0F);
-					other.sendMessage(Util.healthHeader+ChatColor.GREEN+"You have been fed.");
+					p.setFoodLevel(30);
+					p.setSaturation(10);
+					p.setExhaustion(0F);
+					p.sendMessage(Util.healthHeader+ChatColor.GREEN+"You have been fed.");
+					
 				}
-				p.sendMessage(Util.healthHeader+ChatColor.GREEN+"Sucessfully fed all online players.");
+				sender.sendMessage(Util.healthHeader+ChatColor.GREEN+"Successfully fed all online players.");
 				return 0;
 			}
 			else {
 				if(!Util.playerOnline(args[0])) {
 					return 4;
 				}
-				else {
-					Player other = Bukkit.getPlayer(args[0]);
-					if(other.getFoodLevel()>= 30) {
-						p.sendMessage(Util.healthHeader+ChatColor.BLUE+args[0]+ChatColor.RED+" is already at max hunger.");
-						return 0;
-					}
-					other.setFoodLevel(30);
-					other.setSaturation(10);
-					other.setExhaustion(0F);
-					other.sendMessage(Util.healthHeader+ChatColor.GREEN+"You have been fed.");
-					p.sendMessage(Util.healthHeader+ChatColor.GREEN+"Sucessfully fed "+ args[0]);
-					return 0;
+				Player p = Bukkit.getPlayer(args[0]);
+				if(p.getFoodLevel() ==30) {
+					sender.sendMessage(Util.healthHeader+ChatColor.RED+args[0]+" is already at max food level.");
 				}
-			}
-		}
-		else {
-			if(p.getFoodLevel()>= 30) {
-				p.sendMessage(Util.healthHeader+ChatColor.RED+"You are already at max hunger.");
+				p.setFoodLevel(30);
+				p.setSaturation(10);
+				p.setExhaustion(0F);
+				p.sendMessage(Util.healthHeader+ChatColor.GREEN+"You have been fed.");
+				sender.sendMessage(Util.healthHeader+ChatColor.GREEN+"Successfully fed "+args[0]);
 				return 0;
 			}
-			p.setFoodLevel(30);
-			p.setSaturation(10);
-			p.setExhaustion(0F);
-			p.sendMessage(Util.healthHeader+ChatColor.GREEN+"You have been fed.");
-			return 0;
+			
 		}
+		
 	}
-	
+			
+			
+		
 
 }

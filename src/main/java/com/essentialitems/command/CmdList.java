@@ -12,7 +12,7 @@ public enum CmdList {
 	 * 2. Register in plugin.yml
 	 * 3. Create Command Class
 	 * 3a. Make sure the new class extends CommandSkeleton
-	 * 4. Write all necessary code for the command.  If multiple classes are needed (for instance the MOTD command) keep the...
+	 * 4. Write all necessary code for the command.  If multiple classes are needed (for instance the Kit command) keep the...
 	 *    ...command's point of entry in the main command package, then create a new package for the necessary additional classes.
 	 *    
 	 * If not all of the steps are followed, the command will not work.
@@ -34,13 +34,16 @@ public enum CmdList {
 	VANISH("vanish","/vanish",0,false,Util.permission.canVanish.get(),new VanishCommand()),
 	LOCKDOWN("lockdown","/lockdown <Reason>",0,true,Util.permission.canStartLockdown.get(),new LockdownCommand()),
 	GAMEMODE("gamemode","/gamemode <Mode> [Player]",1,false,Util.permission.canGameMode.get(),new GamemodeCommand()),
-	FEED("feed", "/feed [Player]",0,false,Util.permission.canFeed.get(),new FeedCommand()),
-	HEAL("heal", "/heal [Player]",0,false,Util.permission.canHeal.get(),new HealCommand()),
+	FEED("feed", "/feed [Player]",0,true,Util.permission.canFeed.get(),new FeedCommand()),
+	HEAL("heal", "/heal [Player]",0,true,Util.permission.canHeal.get(),new HealCommand()),
 	WORKBENCH("workbench","/workbench",0,false,Util.permission.canWorkbench.get(),new WorkbenchCommand()),
 	CHATSLOW("chatslow","/chatslow <Cooldown in Seconds>",0,true,Util.permission.canChatStop.get(), new ChatSlowCommand()),
 	INVSEE("invsee","/invsee <Player>",1,false,Util.permission.canInvsee.get(), new InvseeCommand()),
 	DAMAGE("damage","/damage [Player] <Damage>",1,false,Util.permission.canDamage.get(), new DamageCommand()),
-	MUTEMIGRATE("mutemigrate","/mutemigrate",0,true,Util.permission.canMigrate.get(),new MigrateCommand())
+	MUTEMIGRATE("mutemigrate","/mutemigrate",0,true,Util.permission.canMigrate.get(),new MigrateCommand()),
+	WHOIS("whois","/whois <Player>",1,true,Util.permission.canWhois.get(),new WhoisCommand()),
+	KIT("kit","/kit <Kit> [SubCommand]",0,false,Util.permission.canKit.get(),new KitCommand()),
+	FLY("fly","/fly",0,false,Util.permission.canFly.get(),new FlyCommand())
 	
 	
 	

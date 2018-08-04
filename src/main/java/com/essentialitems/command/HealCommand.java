@@ -13,53 +13,61 @@ public class HealCommand extends CommandSkeleton {
 
 	@Override
 	public int run(String[] args, Main mainClass, CommandSender sender) {
-		Player p = (Player) sender;
-		if(args.length > 0) {
-			if(args[0].equalsIgnoreCase("all")) {
-				for(Player other : Bukkit.getOnlinePlayers()) {
-					if(other.getName().equals(p.getName())) {
-						continue;
-					}
-					if(other.getHealth() == other.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
-						continue;
-					}
-					
-					other.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-					other.sendMessage(Util.healthHeader+ChatColor.GREEN+"You have been healed.");
-					
-				}
-				p.sendMessage(Util.healthHeader+ChatColor.GREEN+"Healed all online players to full health.");
-				return 0;
+		if(args.length<=0) {
+			
+			if(!(sender instanceof Player)) {
+				return 1;
+			}
+			Player p = (Player) sender;
+			
+			if(Util.hasHealCooldown(p, mainClass)) {
+				int cooldown = mainClass.getConfig().getInt(Util.configKey.healCooldown.toString());
+				long nextallowedmillis = (cooldown*1000)+(long)Util.healCooldowns.get(p);
+				long timeLeftMillis = nextallowedmillis-System.currentTimeMillis();
+				int timeLeftSeconds = (int)timeLeftMillis/1000;
 				
+				
+				sender.sendMessage(Util.healthHeader+ChatColor.RED+"You have "+timeLeftSeconds+" second"+(timeLeftSeconds>1 ? "s" : "")+" before you may use /heal again.");
+				return 0;
+			}
+			
+			p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+			p.sendMessage(Util.healthHeader+ChatColor.GREEN+"You have been healed.");
+			Util.healCooldowns.put(p, System.currentTimeMillis());
+			return 0;
+		
+		}
+		else {
+			if(!Util.checkPermission("essentialitems.heal.other",sender)) {
+				return 5;
+			}
+			
+			if(args[0].equalsIgnoreCase("all")) {
+				for(Player p :Bukkit.getOnlinePlayers()) {
+					if(p.getHealth()==p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
+						continue;
+					}
+					
+					p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+					p.sendMessage(Util.healthHeader+ChatColor.GREEN+"You have been healed.");
+				}
+				sender.sendMessage(Util.healthHeader+ChatColor.GREEN+"Successfully healed all online players.");
+				return 0;
 			}
 			else {
 				if(!Util.playerOnline(args[0])) {
 					return 4;
 				}
 				else {
-					Player other = Bukkit.getPlayer(args[0]);
-					if(other.getHealth() == other.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
-						p.sendMessage(Util.healthHeader+ChatColor.BLUE+args[0]+ChatColor.RED+" is already at max health.");
-						return 0;
-					}
-					other.setHealth(other.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-					other.sendMessage(Util.healthHeader+ChatColor.GREEN+"You have been healed.");
-					p.sendMessage(Util.healthHeader+ChatColor.GREEN+"Sucessfully healed "+ChatColor.BLUE+args[0]);
+					Player p = Bukkit.getPlayer(args[0]);
+					p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+					p.sendMessage(Util.healthHeader+ChatColor.GREEN+"You have been healed.");
 					return 0;
+					
 				}
-			}
-		}
-		else {
-			if(p.getHealth() == p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
-				p.sendMessage(Util.healthHeader+ChatColor.RED+"You are already at max health.");
-				return 0;
-			}
-			p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-			p.sendMessage(Util.healthHeader+ChatColor.GREEN+"You have been healed.");
-			return 0;
-			
+			}	
 		}
 		
 	}
-
+	
 }

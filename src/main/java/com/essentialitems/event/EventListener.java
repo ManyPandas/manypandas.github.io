@@ -8,12 +8,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import com.essentialitems.Main;
 import com.essentialitems.Util;
 import com.essentialitems.command.InvseeCommand;
+import com.essentialitems.command.KitCommand;
 import com.essentialitems.command.MotdCommand;
 import com.essentialitems.command.VanishCommand;
 
@@ -30,11 +32,11 @@ public final class EventListener implements Listener {
 	}
 	
 	@SuppressWarnings("deprecation")
-	@EventHandler(priority = EventPriority.HIGHEST)
+	@EventHandler(priority = EventPriority.HIGH)
 	public void ojin(PlayerJoinEvent e) {
 		
 		//HOLD UP!! We can't display the MOTD yet!  What if the server is locked down?
-		if(!e.getPlayer().hasPermission(Util.permission.bypassLockdown.get())&&mainclass.getConfig().getBoolean(Util.configKey.lockdown.toString())) {
+		if(!Util.checkPermission(Util.permission.bypassLockdown.get(), e.getPlayer())&&mainclass.getConfig().getBoolean(Util.configKey.lockdown.toString())) {
 			e.getPlayer().kickPlayer(ChatColor.RED+""+ChatColor.BOLD+"Sorry, the server is currently in a locked-down state. You do not have permission to log into the server at this time.\n\n"+ChatColor.RESET+ChatColor.BLUE+" Lockdown Reason: "+mainclass.getConfig().getString
 					(Util.configKey.lockdownReason.toString()));
 			//They don't even have access to the server.  Return out.
@@ -72,7 +74,7 @@ public final class EventListener implements Listener {
 		return;
 	}
 	
-	@EventHandler(priority = EventPriority.HIGHEST)
+	@EventHandler(priority = EventPriority.HIGH)
 	public void onInvClick(InventoryClickEvent e) {
 		if(e.getInventory().getName().equals(ChatColor.GREEN+""+ChatColor.BOLD+"Configure MOTD")) {
 			
@@ -81,7 +83,6 @@ public final class EventListener implements Listener {
 			
 			MotdCommand.inventoryClick(p, e.getCurrentItem(), e.getInventory(), e.getSlot(), mainclass);
 			return;
-			
 		}
 		else if(InvseeCommand.invseeing.containsKey((Player) e.getWhoClicked()) && 
 				e.getInventory().getName().equalsIgnoreCase(ChatColor.BLUE+""+ChatColor.BOLD+InvseeCommand.invseeing.get((Player) e.getWhoClicked()).getName()+"'s Inventory") ) {
@@ -90,9 +91,46 @@ public final class EventListener implements Listener {
 		}
 		else {
 			InvseeCommand.invseeing.remove((Player) e.getWhoClicked());
-			return;
+			//We can't return quite yet.  We need to check if somebody is creating or editing a kit.
 		}
 		
+		if(e.getInventory().getName().equalsIgnoreCase(ChatColor.GOLD+""+ChatColor.BOLD+"Create Kit")) {
+			//A kit is being created...
+			e.setCancelled(
+					KitCommand.inventoryClick((Player) e.getWhoClicked(), e.getSlot(), e.getCurrentItem(), e.getInventory(), mainclass)
+					);
+			
+			
+			
+		}
+		if(e.getInventory().getName().equalsIgnoreCase(ChatColor.GOLD+""+ChatColor.BOLD+"Edit Kit")) {
+			//A kit is being edited...
+			e.setCancelled(
+					KitCommand.inventoryClick((Player) e.getWhoClicked(), e.getSlot(), e.getCurrentItem(), e.getInventory(), mainclass)
+					);
+		}
+		
+		
+		
+	}
+	@EventHandler(priority = EventPriority.LOW)
+	public void onInvClose(InventoryCloseEvent e) {
+		
+		Player p = (Player) e.getPlayer();
+		
+		if(e.getInventory().getName().equalsIgnoreCase(ChatColor.GOLD+""+ChatColor.BOLD+"Create Kit")) {
+			//There is a kit in progress with this player's name on it.  We need to get rid of it or else it will cause errors.
+			if(KitCommand.getInProgress(p)!= null) {
+				//Remove the entry.
+				KitCommand.waitingKits.remove(KitCommand.getInProgress(p));
+				return;
+			}
+			//Hmm... I think the event must have fired twice...
+			//I'm not sure, I'm just going to return out.
+			return;
+			
+		}
+		//Not the inventory we're looking for, do nothing
 		
 	}
 	

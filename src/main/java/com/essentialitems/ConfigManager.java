@@ -48,6 +48,13 @@ public final class ConfigManager {
 		if(!mainclass.getConfig().contains("kickUnauthorizedOnLockdown")) {
 			mainclass.getConfig().set("kickUnauthorizedOnLockdown", false);
 		}
+		if(!mainclass.getConfig().contains("feedcooldown")) {
+			mainclass.getConfig().set("feedcooldown", -1);
+			
+		}
+		if(!mainclass.getConfig().contains("healcooldown")) {
+			mainclass.getConfig().set("healcooldown",-1);
+		}
 		if(mainclass.getConfig().isConfigurationSection("MutedPlayers")) {
 			mainclass.getServer().getConsoleSender().sendMessage("[EssentialItems] "+ChatColor.RED+"Warning! Old storage format found for storing muted players!");
 			mainclass.getServer().getConsoleSender().sendMessage("[EssentialItems] "+ChatColor.RED+"This method of storing mutes is now deprecated.  Please consider running the /mutemigrate command to migrate any mutes to the new system.");

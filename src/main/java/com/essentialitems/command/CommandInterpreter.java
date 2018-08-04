@@ -66,10 +66,11 @@ public final class CommandInterpreter {
 		
 	}
 	private boolean checkPermission(CmdList cmd, CommandSender sender) {
-		if(!(sender.hasPermission(cmd.getPermission()))) {
-			return false;
+		if(sender.hasPermission("essentialitems.admin")) {
+			return true;
 		}
-		return true;
+		
+		return sender.hasPermission(cmd.getPermission());
 	}
 	
 

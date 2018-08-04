@@ -12,6 +12,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import com.essentialitems.Main;
 import com.essentialitems.Util;
 import com.essentialitems.command.ChatSlowCommand;
+import com.essentialitems.command.KitCommand;
 import com.essentialitems.command.MotdCommand;
 
 public class ChatListener implements Listener {
@@ -26,15 +27,11 @@ public class ChatListener implements Listener {
 	}
 	
 	
-	/*
-	 * TODO:
-	 * Make this event listener thread-safe.  It calls a lot of Bukkit methods. It is not thread safe to call Bukkit methods from an async event.  
-	 * I am planning to create methods in my Utilities class (com.essentialitems.Util.java) that allow thread safe execution of these necessary methods.
-	 */
+	
 	
 	//We haven't cut the old mute system yet.
 		@SuppressWarnings("deprecation")
-		@EventHandler(priority = EventPriority.HIGHEST)
+		@EventHandler(priority = EventPriority.HIGH)
 		
 		public void onPlayerChat(AsyncPlayerChatEvent e) {
 			
@@ -141,6 +138,14 @@ public class ChatListener implements Listener {
 				//They can bypass the chat slow for now that's fine...
 				return;
 			}
+			
+			//Nobody was changing the MOTD, lets see if they are working with kits...
+			if(KitCommand.chatMessage(e.getPlayer(), e.getMessage(), mainclass)) {
+				//Valid input.
+				e.setCancelled(true);
+				
+				//They can bypass the chat slow for right now that's fine...
+			}
 			else {
 				if(mainclass.getConfig().getBoolean(Util.configKey.chatslow.toString())) {
 					//Looks like a chat slow is in effect!
@@ -149,9 +154,9 @@ public class ChatListener implements Listener {
 					
 					/* 
 					 * I know, I know!  Permission checks aren't thread safe...
-					 * However, since I'm not changing anything, and Spigot doesn't seem to be complaining, I'm not going to change it.
+					 * However, since I'm not changing anything with the world, and Spigot doesn't seem to be complaining, I'm not going to change it.
 					 */
-					if(e.getPlayer().hasPermission(Util.permission.canBypassChatStop.get())) {
+					if(Util.checkPermission(Util.permission.canBypassChatStop.get(),e.getPlayer())) {
 						//They have BYPASS permission?!? 
 						return;
 					}
@@ -161,7 +166,7 @@ public class ChatListener implements Listener {
 						Long lastChat = coolDownTime.get(name);
 						if(lastChat != null) {
 							long allowNext = lastChat.longValue() + mainclass.getConfig().getInt(Util.configKey.chatSlowCooldown.toString()) *1000;
-							if(currentTime < allowNext) {
+							if(currentTime <= allowNext) {
 								e.setCancelled(true);
 								int timeRemaining = (int)((allowNext - currentTime) / 1000L) + 1;
 								e.getPlayer().sendMessage(ChatSlowCommand.chatHeader+ChatColor.DARK_AQUA+"You cannot speak at the moment.  Please wait another "+ChatColor.GRAY+timeRemaining+ChatColor.DARK_AQUA+" second"+

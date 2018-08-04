@@ -8,6 +8,8 @@ import com.essentialitems.Main;
 import com.essentialitems.Util;
 
 public class ChatSlowCommand extends CommandSkeleton{
+	
+
 	public static final String chatHeader ="["+ChatColor.GRAY+ChatColor.BOLD+"Chat Slow"+ChatColor.RESET+"] ";
 
 	@Override

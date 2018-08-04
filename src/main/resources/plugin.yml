@@ -1,5 +1,5 @@
 name: EssentialItems
-version: 3.2-SNAPSHOT
+version: 3.2
 description: 'Essential commands for any server!'
 main: com.essentialitems.Main
 depend: []
@@ -100,6 +100,18 @@ commands:
     mutemigrate:
       description: 'Migrate any old mutes to the new system.'
       usage: '/mutemigrate'
+      
+    whois:
+      description: 'Information about the specified player.'
+      usage: '/whois <Player>'
+      
+    kit:
+      description: 'Access the Kit system.'
+      usage: '/kit <Kit> [Sub-Command] [Player]'
+      
+    fly:
+      description: 'Toggle flight.'
+      usage: '/fly'
       
       
       

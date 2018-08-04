@@ -10,6 +10,7 @@ import com.essentialitems.Util;
 
 public final class BanCommand extends CommandSkeleton {
 
+
 	@Override
 	@SuppressWarnings("deprecation")
 	public int run(String[] args, Main mainClass, CommandSender sender) {

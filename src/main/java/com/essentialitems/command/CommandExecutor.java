@@ -14,7 +14,7 @@ public final class CommandExecutor {
 	
 	private Main mainClass;
 	
-	public CommandExecutor (CommandInterpreter interpreter, Main mainClass) {
+	protected CommandExecutor (CommandInterpreter interpreter, Main mainClass) {
 		//Only the CommandInterpreter may instantiate this.
 		//We also need an instance of the Main class for the commands to use.
 		this.mainClass = mainClass;
