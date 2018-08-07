@@ -375,6 +375,9 @@ public class KitCommand extends CommandSkeleton {
 			}
 			
 			//Check what ItemStack was clicked
+			if(itemClicked == null) {
+				return false;
+			}
 			
 			if(itemClicked.equals(KitCreateGui.buttons.NO.get())) {
 				return true;

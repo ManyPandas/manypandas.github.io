@@ -15,6 +15,11 @@ public class FlyCommand extends CommandSkeleton {
 		
 		Player p = (Player) sender;
 		
+		if(p.getGameMode().equals(GameMode.SPECTATOR)) {
+			p.sendMessage(ChatColor.LIGHT_PURPLE+"Cannot toggle flight in spectator mode.");
+			return 0;
+		}
+		
 		
 		if(p.isFlying()) {
 			if(p.getGameMode().equals(GameMode.SURVIVAL)||p.getGameMode().equals(GameMode.ADVENTURE)) {
@@ -32,10 +37,11 @@ public class FlyCommand extends CommandSkeleton {
 			}
 		}
 		
-		double y = p.getLocation().getY();
-		y++;
-		
-		p.teleport(new Location(p.getWorld(), p.getLocation().getX(), y, p.getLocation().getZ()));
+		Location tele = p.getLocation();
+		double newY = (double)tele.getBlockY();
+		newY++;
+		tele.setY(newY);
+		p.teleport(tele);
 		p.setAllowFlight(true);
 		p.setFlying(true);
 		p.sendMessage(ChatColor.LIGHT_PURPLE+"You are now flying.");
