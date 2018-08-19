@@ -3,20 +3,19 @@ package com.essentialitems.event;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import com.essentialitems.Main;
 import com.essentialitems.Util;
-import com.essentialitems.command.InvseeCommand;
 import com.essentialitems.command.KitCommand;
-import com.essentialitems.command.MotdCommand;
 import com.essentialitems.command.VanishCommand;
 
 public final class EventListener implements Listener {
@@ -37,8 +36,8 @@ public final class EventListener implements Listener {
 		
 		//HOLD UP!! We can't display the MOTD yet!  What if the server is locked down?
 		if(!Util.checkPermission(Util.permission.bypassLockdown.get(), e.getPlayer())&&mainclass.getConfig().getBoolean(Util.configKey.lockdown.toString())) {
-			e.getPlayer().kickPlayer(ChatColor.RED+""+ChatColor.BOLD+"Sorry, the server is currently in a locked-down state. You do not have permission to log into the server at this time.\n\n"+ChatColor.RESET+ChatColor.BLUE+" Lockdown Reason: "+mainclass.getConfig().getString
-					(Util.configKey.lockdownReason.toString()));
+			e.getPlayer().kickPlayer(ChatColor.RED+""+ChatColor.BOLD+"Sorry, the server is currently in a locked-down state. You do not have permission to log into the server at this time.\n\n"+ChatColor.RESET+ChatColor.BLUE+
+					" Lockdown Reason: "+mainclass.getConfig().getString(Util.configKey.lockdownReason.toString()));
 			//They don't even have access to the server.  Return out.
 			return;
 		}
@@ -74,45 +73,6 @@ public final class EventListener implements Listener {
 		return;
 	}
 	
-	@EventHandler(priority = EventPriority.HIGH)
-	public void onInvClick(InventoryClickEvent e) {
-		if(e.getInventory().getName().equals(ChatColor.GREEN+""+ChatColor.BOLD+"Configure MOTD")) {
-			
-			e.setCancelled(true);
-			Player p =(Player) e.getWhoClicked();
-			
-			MotdCommand.inventoryClick(p, e.getCurrentItem(), e.getInventory(), e.getSlot(), mainclass);
-			return;
-		}
-		else if(InvseeCommand.invseeing.containsKey((Player) e.getWhoClicked()) && 
-				e.getInventory().getName().equalsIgnoreCase(ChatColor.BLUE+""+ChatColor.BOLD+InvseeCommand.invseeing.get((Player) e.getWhoClicked()).getName()+"'s Inventory") ) {
-			e.setCancelled(true);
-			return;
-		}
-		else {
-			InvseeCommand.invseeing.remove((Player) e.getWhoClicked());
-			//We can't return quite yet.  We need to check if somebody is creating or editing a kit.
-		}
-		
-		if(e.getInventory().getName().equalsIgnoreCase(ChatColor.GOLD+""+ChatColor.BOLD+"Create Kit")) {
-			//A kit is being created...
-			e.setCancelled(
-					KitCommand.inventoryClick((Player) e.getWhoClicked(), e.getSlot(), e.getCurrentItem(), e.getInventory(), mainclass)
-					);
-			
-			
-			
-		}
-		if(e.getInventory().getName().equalsIgnoreCase(ChatColor.GOLD+""+ChatColor.BOLD+"Edit Kit")) {
-			//A kit is being edited...
-			e.setCancelled(
-					KitCommand.inventoryClick((Player) e.getWhoClicked(), e.getSlot(), e.getCurrentItem(), e.getInventory(), mainclass)
-					);
-		}
-		
-		
-		
-	}
 	@EventHandler(priority = EventPriority.LOW)
 	public void onInvClose(InventoryCloseEvent e) {
 		
@@ -131,6 +91,23 @@ public final class EventListener implements Listener {
 			
 		}
 		//Not the inventory we're looking for, do nothing
+		
+	}
+	@EventHandler(priority = EventPriority.HIGH)
+	public void onEntDamage(EntityDamageEvent e) {
+		//Check if the entity is a HumanEntity
+		if(e.getEntity() instanceof HumanEntity) {
+			HumanEntity pEnt = (HumanEntity) e.getEntity();
+			//Cast the HumanEntity to a player
+			Player p = (Player) pEnt;
+			//Check to see if they have toggled invulnerability
+			if(Util.invulnerablePlayers.contains(p)) {
+				e.setCancelled(true);
+				return;
+			}
+			
+			
+		}
 		
 	}
 	

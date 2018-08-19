@@ -43,7 +43,8 @@ public enum CmdList {
 	MUTEMIGRATE("mutemigrate","/mutemigrate",0,true,Util.permission.canMigrate.get(),new MigrateCommand()),
 	WHOIS("whois","/whois <Player>",1,true,Util.permission.canWhois.get(),new WhoisCommand()),
 	KIT("kit","/kit <Kit> [SubCommand]",0,false,Util.permission.canKit.get(),new KitCommand()),
-	FLY("fly","/fly",0,false,Util.permission.canFly.get(),new FlyCommand())
+	FLY("fly","/fly",0,false,Util.permission.canFly.get(),new FlyCommand()),
+	GODMODE("godmode", "/godmode",0,false,Util.permission.canGodMode.get(),new GodCommand()),
 	
 	
 	

@@ -113,6 +113,11 @@ commands:
       description: 'Toggle flight.'
       usage: '/fly'
       
+    godmode:
+      description: 'Toggle invulnerability.'
+      usage: '/godmode'
+      aliases: [god,invuln,gmode]
+      
       
       
     

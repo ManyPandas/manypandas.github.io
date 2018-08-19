@@ -18,6 +18,7 @@ import com.essentialitems.command.kit.KitEditGui;
 import com.essentialitems.command.motd.MotdGui;
 import com.essentialitems.event.ChatListener;
 import com.essentialitems.event.EventListener;
+import com.essentialitems.event.InvClickListener;
 
 public class Main extends JavaPlugin {
 	
@@ -33,6 +34,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		this.getServer().getConsoleSender().sendMessage("[EssentialItems] "+ChatColor.GOLD+"Enabling...");
 		new EventListener(this, new ChatListener(this));
+		new InvClickListener(this);
 		
 		this.getServer().getConsoleSender().sendMessage("[EssentialItems] "+ChatColor.GOLD+"Checking Config...");
 		ConfigManager.initCheck(this);

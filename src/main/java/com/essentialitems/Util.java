@@ -27,6 +27,8 @@ public final class Util {
 	
 	public static final ArrayList<CooldownTicket> kitCooldowns = new ArrayList<CooldownTicket>();
 	
+	public static final ArrayList<Player> invulnerablePlayers = new ArrayList<Player>();
+	
 	public static final HashMap<Player, Long> healCooldowns = new HashMap<Player, Long>();
 	public static final HashMap<Player, Long> feedCooldowns = new HashMap<Player, Long>();
 	
@@ -514,6 +516,7 @@ public final class Util {
 		 canWhois(new Permission("essentialitems.whois")),
 		 canKit(new Permission("essentialitems.kit.command")),
 		 canFly(new Permission("essentialitems.fly")),
+		 canGodMode(new Permission("essentialitems.god")),
 		  ;
 		
 		
