@@ -45,6 +45,7 @@ public enum CmdList {
 	KIT("kit","/kit <Kit> [SubCommand]",0,false,Util.permission.canKit.get(),new KitCommand()),
 	FLY("fly","/fly",0,false,Util.permission.canFly.get(),new FlyCommand()),
 	GODMODE("godmode", "/godmode",0,false,Util.permission.canGodMode.get(),new GodCommand()),
+	GETPOS("getpos","/getpos [Player]",0,true,Util.permission.canGetPos.get(),new GetposCommand())
 	
 	
 	

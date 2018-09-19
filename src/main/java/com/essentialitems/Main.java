@@ -102,6 +102,13 @@ public class Main extends JavaPlugin {
 		}
 		return true;
 	}
+	@Override
+	public void saveConfig() {
+		super.saveConfig();
+		saveKits();
+		saveMute();
+		
+	}
 	
 	
 	

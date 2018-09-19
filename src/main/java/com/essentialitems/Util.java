@@ -143,13 +143,6 @@ public final class Util {
 		return;
 		
 	}
-	//Old unmute method
-	@Deprecated
-	public static void unmute(String uuid, Main mainclass) {
-		mainclass.getConfig().getConfigurationSection(Util.configKey.MutedPlayers.toString()).set(uuid,null);
-		mainclass.saveConfig();
-		
-	}
 	
 	
 	public static boolean newUnmute(String uuid, Main mainclass) {
@@ -170,27 +163,6 @@ public final class Util {
 		return true;
 	}
 	
-	//Checks the old mute system.
-	@Deprecated
-	public static boolean getMuted(String uniqueId, Main mainclass) {
-		
-		if(!mainclass.getConfig().isConfigurationSection("MutedPlayers")) {
-			return false;
-		}
-		if(!mainclass.getConfig().getConfigurationSection(configKey.MutedPlayers.toString()).contains(uniqueId)) {
-			return false;
-		}
-		return true;
-		
-		
-	} 
-	
-	//Old Get Reason method
-	@Deprecated
-	public static String getMuteReason(String uniqueId, Main mainclass) {
-		return mainclass.getConfig().getConfigurationSection(configKey.MutedPlayers.toString()).getString(uniqueId);
-		
-	}
 	
 	public static String newGetMuteReason(String uuid, Main mainclass) {
 		if(mainclass.muted.getConfigurationSection(uuid) == null) {
@@ -517,6 +489,7 @@ public final class Util {
 		 canKit(new Permission("essentialitems.kit.command")),
 		 canFly(new Permission("essentialitems.fly")),
 		 canGodMode(new Permission("essentialitems.god")),
+		 canGetPos(new Permission("essentialitems.getpos")),
 		  ;
 		
 		

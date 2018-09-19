@@ -29,8 +29,7 @@ public class ChatListener implements Listener {
 	
 	
 	
-	//We haven't cut the old mute system yet.
-		@SuppressWarnings("deprecation")
+	
 		@EventHandler(priority = EventPriority.HIGH)
 		
 		public void onPlayerChat(AsyncPlayerChatEvent e) {
@@ -98,16 +97,14 @@ public class ChatListener implements Listener {
 					
 				}
 			}
-			//Looks like this is a legacy mute.
-			//Or they passed through the checks on the new mute system.
 			
 			
 			/*
-			 * TODO: Remove legacy mute support.  Version string must be 3.3.   This is release 3.2.  Give the people a chance to migrate to the new system.
+			 * REMOVED LEGACY MUTE SUPPORT.  ALL CODE CHECKING OLD SYSTEM (APART FROM CONFIGMANAGER CODE) HAS BEEN REMOVED. 
 			 */
 			
-			//Check the old mute system for any existing mutes.
-			if(Util.getMuted(uuid, mainclass)) {
+			
+			/*if(Util.getMuted(uuid, mainclass)) {
 				//The old system doesn't support temporary mutes.  We can cancel the event right away.
 				e.setCancelled(true);
 				
@@ -121,7 +118,7 @@ public class ChatListener implements Listener {
 				
 				return;
 				
-			}
+			}*/
 			
 			
 			/* Wow.  Those were some exhaustive checks there.  But, they all passed.
@@ -187,5 +184,7 @@ public class ChatListener implements Listener {
 			}	
 			
 		}
+		//End of listener
 
 }
+//EOF

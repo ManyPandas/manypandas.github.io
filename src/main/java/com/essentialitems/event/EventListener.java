@@ -55,7 +55,7 @@ public final class EventListener implements Listener {
 	}
 	
 	@SuppressWarnings("deprecation")
-	@EventHandler(priority = EventPriority.LOWEST)
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerDisconnect(PlayerQuitEvent e) {
 		Player p1 = e.getPlayer();
 		chat.coolDownTime.remove(p1.getName());
@@ -68,12 +68,15 @@ public final class EventListener implements Listener {
 			for(Player p : Bukkit.getOnlinePlayers()) {
 				p.showPlayer(e.getPlayer());
 			}
+		}
+		if(Util.invulnerablePlayers.contains(p1)) {
+			Util.invulnerablePlayers.remove(p1);
 			return;
 		}
 		return;
 	}
 	
-	@EventHandler(priority = EventPriority.LOW)
+	@EventHandler(priority = EventPriority.MONITOR)
 	public void onInvClose(InventoryCloseEvent e) {
 		
 		Player p = (Player) e.getPlayer();

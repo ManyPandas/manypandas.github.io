@@ -118,6 +118,10 @@ commands:
       usage: '/godmode'
       aliases: [god,invuln,gmode]
       
+    getpos:
+      description: 'Get a players XYZ coordinates'
+      usage: '/getpos [Player]'
+      
       
       
     
