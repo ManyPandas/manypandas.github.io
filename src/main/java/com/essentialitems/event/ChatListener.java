@@ -96,37 +96,7 @@ public class ChatListener implements Listener {
 					}
 					
 				}
-			}
-			
-			
-			/*
-			 * REMOVED LEGACY MUTE SUPPORT.  ALL CODE CHECKING OLD SYSTEM (APART FROM CONFIGMANAGER CODE) HAS BEEN REMOVED. 
-			 */
-			
-			
-			/*if(Util.getMuted(uuid, mainclass)) {
-				//The old system doesn't support temporary mutes.  We can cancel the event right away.
-				e.setCancelled(true);
-				
-				//Send the player a message telling they are muted.
-				
-				//Get the reason.
-				String reason = Util.getMuteReason(uuid, mainclass);
-				
-				//Send the message.
-				e.getPlayer().sendMessage(Util.punishHeader+ChatColor.RED+"You cannot speak. You are muted."+ChatColor.DARK_GREEN+" Reason: "+ reason);
-				
-				return;
-				
-			}*/
-			
-			
-			/* Wow.  Those were some exhaustive checks there.  But, they all passed.
-			 * If they didn't we wouldn't even get to this point.
-			 * Continuing on...
-			 */
-			
-			
+			}	
 			
 			//Now let's send the message to the MOTD event, somebody may be setting it.
 			if(MotdCommand.chatMessage(e.getPlayer(), e.getMessage(), mainclass)) {

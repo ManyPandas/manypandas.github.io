@@ -490,6 +490,7 @@ public final class Util {
 		 canFly(new Permission("essentialitems.fly")),
 		 canGodMode(new Permission("essentialitems.god")),
 		 canGetPos(new Permission("essentialitems.getpos")),
+		 canTrash(new Permission("essentialitems.trash")),
 		  ;
 		
 		

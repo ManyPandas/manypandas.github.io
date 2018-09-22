@@ -122,6 +122,12 @@ commands:
       description: 'Get a players XYZ coordinates'
       usage: '/getpos [Player]'
       
+    trash:
+      description: 'Opens up a blank inventory to place trash into.'
+      usage: '/trash'
+      aliases: [garbage,dispose,disposal]
+    
+      
       
       
     
