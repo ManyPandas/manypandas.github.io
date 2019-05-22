@@ -126,6 +126,15 @@ commands:
       description: 'Opens up a blank inventory to place trash into.'
       usage: '/trash'
       aliases: [garbage,dispose,disposal]
+      
+    echest:
+      description: 'Opens up your Ender Chest'
+      usage: '/echest'
+    warp:
+      description: 'Access the warp system.'
+      usage: '/warp <Warp Name> [Sub-Command]'
+    actionbar:
+      description: 'Test'
     
       
       

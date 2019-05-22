@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import com.essentialitems.Main;
@@ -111,6 +112,20 @@ public final class EventListener implements Listener {
 			
 			
 		}
+		
+	}
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onMovement(PlayerMoveEvent e) {
+		
+		if(Util.warpTasks.containsKey(e.getPlayer())) {
+			//The player is warping.
+			//They moved, so we need to cancel the event.
+			Bukkit.getServer().getScheduler().cancelTask(Util.warpTasks.get(e.getPlayer()));
+			e.getPlayer().sendMessage(ChatColor.RED+"Warp Cancelled.");
+			Util.warpTasks.remove(e.getPlayer());
+			
+		}
+		
 		
 	}
 	

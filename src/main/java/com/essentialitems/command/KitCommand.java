@@ -216,9 +216,9 @@ public class KitCommand extends CommandSkeleton {
 	private int subcommandHelp(Player p) {
 		String header = "["+ChatColor.GREEN+ChatColor.BOLD+"Kit Help"+ChatColor.RESET+"] ";
 		p.sendMessage(header+ChatColor.GREEN+ChatColor.BOLD+"EssentialItems Kit Help");
-		p.sendMessage(ChatColor.GREEN+"Main Command Usage:  /kit <Name> [Sub Command]");
+		p.sendMessage(ChatColor.GREEN+"Main Command Usage:  /kit <Name> [Sub Command] [Player]\n\n");
 		p.sendMessage(header+ChatColor.GREEN+ChatColor.BOLD+"Sub Commands:");
-		p.sendMessage(ChatColor.GREEN+"If a sub-command is not specified, the system will default to equipping the specified kit if it exists.");
+		p.sendMessage(ChatColor.GREEN+"If a sub-command is not specified, the system will default to equipping the specified kit if it exists.\n");
 		p.sendMessage(ChatColor.GREEN+"'create' - Create a kit with the specified name if it does not exist already.");
 		p.sendMessage(ChatColor.GREEN+"'delete' - Delete an existing kit.");
 		p.sendMessage(ChatColor.GREEN+"'edit' - Edit an Existing kit.");
@@ -514,7 +514,7 @@ public class KitCommand extends CommandSkeleton {
 				
 				mainclass.kits.getConfigurationSection(kit.getName()).set("items", items);
 				
-				mainclass.saveKits();
+				mainclass.saveConfig();
 				
 				clicker.closeInventory();
 				clicker.sendMessage(ChatColor.GREEN+"Success.  Your changes have been saved.");
@@ -545,6 +545,7 @@ public class KitCommand extends CommandSkeleton {
 				Kit kit = awaitingDeletes.get(p);
 				kit.delete(mainclass);
 				p.sendMessage(kitHeader+ChatColor.GREEN+"Success.  The kit '"+kit.getName()+"' has been deleted.");
+				awaitingDeletes.remove(p);
 				return true;
 			}
 			if(message.equalsIgnoreCase("n")) {

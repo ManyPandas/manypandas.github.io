@@ -32,6 +32,8 @@ public final class Util {
 	public static final HashMap<Player, Long> healCooldowns = new HashMap<Player, Long>();
 	public static final HashMap<Player, Long> feedCooldowns = new HashMap<Player, Long>();
 	
+	public static final HashMap<Player, Integer> warpTasks = new HashMap<Player, Integer>();
+	
 	//No instances
 	private Util() {}
 	
@@ -101,7 +103,7 @@ public final class Util {
 		mainclass.muted.getConfigurationSection(uuid).set("reason", reason);
 		mainclass.muted.getConfigurationSection(uuid).set("name", name);
 		mainclass.muted.getConfigurationSection(uuid).set("expires", (long)-1);
-		mainclass.saveMute();
+		mainclass.saveConfig();
 		Bukkit.broadcastMessage(punishHeader+ChatColor.BLUE+name+ChatColor.RED+ " has been permanently muted.");
 		Bukkit.broadcastMessage(punishHeader+ChatColor.DARK_GREEN+"Reason: "+reason);
 	}
@@ -111,7 +113,7 @@ public final class Util {
 			mainclass.muted.getConfigurationSection(uuid).set("reason", reason);
 			mainclass.muted.getConfigurationSection(uuid).set("name", name);
 			mainclass.muted.getConfigurationSection(uuid).set("expires", (long)-1);
-			mainclass.saveMute();
+			mainclass.saveConfig();
 			return;
 		}
 		else {
@@ -119,7 +121,7 @@ public final class Util {
 			mainclass.muted.getConfigurationSection(uuid).set("reason", reason);
 			mainclass.muted.getConfigurationSection(uuid).set("name", name);
 			mainclass.muted.getConfigurationSection(uuid).set("expires", (long)-1);
-			mainclass.saveMute();
+			mainclass.saveConfig();
 			Bukkit.broadcastMessage(punishHeader+ChatColor.BLUE+name+ChatColor.RED+ " has been permanently muted.");
 			Bukkit.broadcastMessage(punishHeader+ChatColor.DARK_GREEN+"Reason: "+reason);
 			return;
@@ -131,7 +133,7 @@ public final class Util {
 		mainclass.muted.getConfigurationSection(uuid).set("reason", reason);
 		mainclass.muted.getConfigurationSection(uuid).set("name", name);
 		mainclass.muted.getConfigurationSection(uuid).set("expires", expiresmillis);
-		mainclass.saveMute();
+		mainclass.saveConfig();
 		int time = (int)(expiresmillis/60/1000) -(int)(System.currentTimeMillis()/60/1000);
 		if(time>60) {
 			Bukkit.broadcastMessage(punishHeader+ChatColor.BLUE+name+ChatColor.RED+ " has been muted for "+time/60+" hour(s).");
@@ -151,7 +153,7 @@ public final class Util {
 		}
 		else {
 			mainclass.muted.set(uuid, null);
-			mainclass.saveMute();
+			mainclass.saveConfig();
 			return true;
 		}
 	}
@@ -428,23 +430,23 @@ public final class Util {
 		
 		//All used configurations key are stored here, in an easy-to-access enumeration.
 		//These are for use with the main config.yml file only.
-		doMotdSubtitle("doMotdSubtitleMessage"),
+		chatslow("chatslow"),
+		chatSlowCooldown("chatslow-cooldown"),
+		chatSlowReason("chatslow-reason"),
 		doMotdChatMessage("doMotdChatMessage"),
+		doMotdSubtitle("doMotdSubtitleMessage"),
 		doMotdTitle("doMotdTitleMessage"),
 		doOjinMessage("doPlayerJoinedMessage"),
 		doOleaMessage("doPlayerLeftMessage"),
-		motdTitleMessage("motdTitleMessage"),
-		motdSubtitleMessage("motdSubtitleMessage"),
-		motdChatMessage("motdChatMessage"),
-		MutedPlayers("MutedPlayers"),
-		lockdown("lockdown"),
-		lockdownReason("lockdown-reason"),
-		chatSlowReason("chatslow-reason"),
-		chatSlowCooldown("chatslow-cooldown"),
-		chatslow("chatslow"),
-		kickUnauthorizedOnLockdown("kickUnauthorizedOnLockdown"),
 		feedCooldown("feedcooldown"),
 		healCooldown("healcooldown"),
+		kickUnauthorizedOnLockdown("kickUnauthorizedOnLockdown"),
+		lockdown("lockdown"),
+		lockdownReason("lockdown-reason"),
+		motdChatMessage("motdChatMessage"),
+		motdSubtitleMessage("motdSubtitleMessage"),
+		motdTitleMessage("motdTitleMessage"),
+		MutedPlayers("MutedPlayers"),
 		
 		
 		;
@@ -462,35 +464,37 @@ public final class Util {
 		
 	}
 	public static enum permission {
-		 canBan(new Permission("essentialitems.ban")),
-		 canWarn(new Permission("essentialitems.warn")),
-		 canBroadcast(new Permission("essentialitems.broadcast")),
-		 canUnban(new Permission("essentialitems.unban")),
-		 canKick(new Permission("essentialitems.kick")),
-		 canMsg(new Permission("essentialitems.msg")),
-		 canTempBan(new Permission("essentialitems.tempban")),
-		 canMute(new Permission("essentialitems.mute")) ,
-		 canUnmute(new Permission("essentialitems.unmute")),
-		 canMotd(new Permission("essentialitems.motd")),
-		 canVanish(new Permission("essentialitems.vanish")),
-		 canStartLockdown(new Permission("essentialitems.lockdown.command")),
 		 bypassLockdown(new Permission("essentialitems.lockdown.bypass")),
-		 canGameMode(new Permission("essentialitems.gamemode")),
-		 canFeed(new Permission("essentialitems.feed")),
-		 canWorkbench(new Permission("essentialitems.workbench")),
-		 canHeal(new Permission("essentialitems.heal")),
-		 canChatStop(new Permission("essentialitems.chatslow.command")),
+		 canBan(new Permission("essentialitems.ban")),
+		 canBroadcast(new Permission("essentialitems.broadcast")),
 		 canBypassChatStop(new Permission("essentialitems.chatslow.bypass")),
-		 canTempMute(new Permission("essentialitems.tempmute")),
-		 canInvsee(new Permission("essentialitems.invsee")),
+		 canChatStop(new Permission("essentialitems.chatslow.command")),
 		 canDamage(new Permission("essentialitems.damage")),
-		 canMigrate(new Permission("essentialitems.migrate")),
-		 canWhois(new Permission("essentialitems.whois")),
-		 canKit(new Permission("essentialitems.kit.command")),
+		 canEchest(new Permission("essentialitems.echest")),
+		 canFeed(new Permission("essentialitems.feed")),
 		 canFly(new Permission("essentialitems.fly")),
-		 canGodMode(new Permission("essentialitems.god")),
+		 canGameMode(new Permission("essentialitems.gamemode")),
 		 canGetPos(new Permission("essentialitems.getpos")),
+		 canGodMode(new Permission("essentialitems.god")),
+		 canHeal(new Permission("essentialitems.heal")),
+		 canInvsee(new Permission("essentialitems.invsee")),
+		 canKick(new Permission("essentialitems.kick")),
+		 canKit(new Permission("essentialitems.kit.command")),
+		 canMigrate(new Permission("essentialitems.migrate")),
+		 canMotd(new Permission("essentialitems.motd")),
+		 canMsg(new Permission("essentialitems.msg")),
+		 canMute(new Permission("essentialitems.mute")) ,
+		 canStartLockdown(new Permission("essentialitems.lockdown.command")),
+		 canTempBan(new Permission("essentialitems.tempban")),
+		 canTempMute(new Permission("essentialitems.tempmute")),
 		 canTrash(new Permission("essentialitems.trash")),
+		 canUnban(new Permission("essentialitems.unban")),
+		 canUnmute(new Permission("essentialitems.unmute")),
+		 canVanish(new Permission("essentialitems.vanish")),
+		 canWarn(new Permission("essentialitems.warn")),
+		 canWhois(new Permission("essentialitems.whois")),
+		 canWorkbench(new Permission("essentialitems.workbench")),
+		 
 		  ;
 		
 		

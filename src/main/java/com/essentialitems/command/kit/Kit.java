@@ -92,7 +92,7 @@ public final class Kit {
 		
 		if(!mainclass.kits.isConfigurationSection(this.name)) {
 			mainclass.kits.createSection(this.name);
-			mainclass.saveKits();
+			mainclass.saveConfig();
 			
 		}
 		
@@ -107,7 +107,7 @@ public final class Kit {
 		//We can write an arraylist to the configuration because it is serializeable and ItemStacks are serializeable as well
 		mainclass.kits.getConfigurationSection(this.name).set("items", itemsList);
 		
-		mainclass.saveKits();
+		mainclass.saveConfig();
 		
 		
 	}
@@ -126,18 +126,9 @@ public final class Kit {
 	}
 	public void delete(Main mainclass) {
 		mainclass.kits.set(this.name, null);
-		mainclass.saveKits();
+		mainclass.saveConfig();
 	}
 	
-	
-	//We'll work on this later...
-	/*
-	 * TODO: Add edit GUI
-	 */
-	public void edit() {
-		
-		
-	}
 	
 	public String getName() {
 		

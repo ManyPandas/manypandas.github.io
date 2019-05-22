@@ -110,6 +110,7 @@ public class ChatListener implements Listener {
 			if(KitCommand.chatMessage(e.getPlayer(), e.getMessage(), mainclass)) {
 				//Valid input.
 				e.setCancelled(true);
+				return;
 				
 				//They can bypass the chat slow for right now that's fine...
 			}

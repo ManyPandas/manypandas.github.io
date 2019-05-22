@@ -52,6 +52,9 @@ public final class ConfigManager {
 			mainclass.getConfig().set("feedcooldown", -1);
 			
 		}
+		if(!mainclass.getConfig().contains("warpDelay")) {
+			mainclass.getConfig().set("warpDelay", 5000L);
+		}
 		if(!mainclass.getConfig().contains("healcooldown")) {
 			mainclass.getConfig().set("healcooldown",-1);
 		}

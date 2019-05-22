@@ -52,7 +52,14 @@ public final class CommandReceiver implements org.bukkit.command.CommandExecutor
 	 * 23: Cooldown is in effect (say nothing, this message is handled by the KitCommand system as the CommandReceiver doesn't know what is happening behind the scenes.
 	 * All it knows is that it returned a certain error code.)
 	 * 24: Kit already exists.
-	 * 25: Error with specified player (gets the name from args[1] instead of args[0]
+	 * 25: Error with specified player (gets the name from args[2] instead of args[0])
+	 * 
+	 * 
+	 * And one error code for the warp system.
+	 * 30: Not enough arguments for the subcommand.
+	 * 
+	 * 
+	 * 
 	 * 
 	 */
 
@@ -62,6 +69,7 @@ public final class CommandReceiver implements org.bukkit.command.CommandExecutor
 		//Immediate response to /essentialitems (none of that command processing bull-crap)
 		if(cmd.getName().equalsIgnoreCase("essentialitems")) {
 			sender.sendMessage(esheader+ChatColor.GREEN+ChatColor.BOLD+"Thank you for using Essentialitems!");
+			sender.sendMessage("");
 			sender.sendMessage(esheader+ChatColor.GREEN+ChatColor.BOLD+"You are running plugin version "+ChatColor.RESET+ChatColor.GREEN+mainclass.getDescription().getVersion());
 			sender.sendMessage(esheader+ChatColor.GREEN+ChatColor.BOLD+"Project Page:\n"+ChatColor.RESET+ChatColor.GREEN+"https://dev.bukkit.org/projects/essentialitems");
 			sender.sendMessage(esheader+ChatColor.GREEN+ChatColor.BOLD+"GitHub:\n"+ChatColor.RESET+ChatColor.GREEN+"https://github.com/ManyPandas/manypandas.github.io");
@@ -89,6 +97,11 @@ public final class CommandReceiver implements org.bukkit.command.CommandExecutor
 					}
 				}
 				
+			}
+			
+			if(errcode == 30) {
+				sender.sendMessage(ChatColor.RED+"There were not enough arguments to run the sub-command.  Please check /warp help for more information.");
+			    return true;
 			}
 			
 			//We know for a FACT that only the kit command will return this error code, so we can just hard-code the message.

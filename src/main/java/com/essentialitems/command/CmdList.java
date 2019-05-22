@@ -20,10 +20,12 @@ public enum CmdList {
 	 */
 	
 	
+	ACTIONBAR("actionbar","/actionbar <Player> <Message>",2,true,new Permission("essentialitems.actionbar"),new ActionBarCommand()),
 	BANPLAYER("ban", "/ban <Player> <Reason>",2,true,Util.permission.canBan.get(), new BanCommand()),
 	BROADCAST("broadcast","/broadcast <Message>",1,true,Util.permission.canBroadcast.get(), new BroadcastCommand()),
 	CHATSLOW("chatslow","/chatslow <Cooldown in Seconds>",0,true,Util.permission.canChatStop.get(), new ChatSlowCommand()),
 	DAMAGE("damage","/damage [Player] <Damage>",1,false,Util.permission.canDamage.get(), new DamageCommand()),
+	ECHEST("echest","/echest [Player]",0,false,Util.permission.canEchest.get(),new EchestCommand()),
 	FEED("feed", "/feed [Player]",0,true,Util.permission.canFeed.get(),new FeedCommand()),
 	FLY("fly","/fly",0,false,Util.permission.canFly.get(),new FlyCommand()),
 	GAMEMODE("gamemode","/gamemode <Mode> [Player]",1,false,Util.permission.canGameMode.get(),new GamemodeCommand()),
@@ -45,8 +47,10 @@ public enum CmdList {
 	UNMUTE("unmute","/unmute <Player>", 1,true,Util.permission.canUnmute.get(), new UnmuteCommand()),
 	VANISH("vanish","/vanish",0,false,Util.permission.canVanish.get(),new VanishCommand()),
 	WARN("warn", "/warn <Player> <Reason>",2,true,Util.permission.canWarn.get(),new WarnCommand()),
+	WARP("warp", "/warp <Warp Name>",1,false,new Permission("essentialitems.warp"), new WarpCommand()),
 	WHOIS("whois","/whois <Player>",1,true,Util.permission.canWhois.get(),new WhoisCommand()),
 	WORKBENCH("workbench","/workbench",0,false,Util.permission.canWorkbench.get(),new WorkbenchCommand()),
+	
 	
 	
 	
