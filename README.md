@@ -3,8 +3,8 @@ Essential commands for any Bukkit server!
 
 
 # THIS IS NO LONGER THE WORKING REPOSITORY FOR ESSENTIALITEMS
-# WE HAVE MIGRATED TO GITLAB
 # PLEASE VIEW THE UPDATED REPOSITORY AT THIS LINK:
+https://gitlab.com/ManyPandas/manypandas-github-io
 
 
 
