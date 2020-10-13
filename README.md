@@ -1,10 +1,10 @@
 # EssentialItems
 Essential commands for any Bukkit server!
 
-
-# THIS IS NO LONGER THE WORKING REPOSITORY FOR ESSENTIALITEMS
-# PLEASE VIEW THE UPDATED REPOSITORY AT THIS LINK:
-https://gitlab.com/ManyPandas/manypandas-github-io
+#JUST KIDDING THIS IS THE OFFICIAL REPO NOW
+https://gitlab.com/ManyPandas/desertedpunish.git
+#THIS PROJECT IS ABANDONED AS OF AUGUST 27th 2020
+#NO MORE VERSIONS WILL BE RELEASED
 
 
 
